@@ -5695,7 +5695,7 @@ img {
 
 .login-page .card-login {
   border-radius: 0.25rem;
-  padding-bottom: 0.7rem;
+ /* padding-bottom: 0.7rem;*/
   max-width: 520px;
 }
 
