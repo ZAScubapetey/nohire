@@ -17,7 +17,31 @@
   <!-- CSS Files -->
   <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="/assets/css/now-ui-kit.css?v=1.2.0" rel="stylesheet" />
-
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function () {
+      // https://dashboard.emailjs.com/admin/account
+      emailjs.init('UNu1PAsajrmR9PMo0');
+    })();
+  </script>
+  <script type="text/javascript">
+    window.onload = function () {
+      document.getElementById('contact-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+        this.product.value = "Nohire";
+        // these IDs from the previous steps
+        emailjs.sendForm('nogroup', 'nogroup_form', this)
+          .then(function () {
+            console.log('SUCCESS!');
+            alert('Your mail is sent!');
+            location.reload();
+          }, function (error) {
+            console.log('FAILED...', error);
+            alert('Your mail is not sent!');
+          });
+      });
+    }
+  </script>
 </head>
 
 <body class="login-page sidebar-collapse">
@@ -120,8 +144,7 @@
                 </div>
               </div>-->
             <div class="card-footer text-center">
-              <a href="https://search.nohire.co.za/"
-                class="btn btn-primary btn-round btn-lg btn-block">Login</a>
+              <a href="https://search.nohire.co.za/" class="btn btn-primary btn-round btn-lg btn-block">Login</a>
               <div class="pull-left">
               </div>
               <div class="pull-right">
@@ -136,28 +159,111 @@
 
   </div>
   <!-- Mini Modal -->
-  <div class="modal fade  modal-mini modal-primary" id="myModal1" tabindex="-1" role="dialog"
+  <div class="modal fade   modal-primary" id="myModal1" tabindex="-1" role="dialog"
     aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header justify-content-center">
-          <h4 class="text-white text-strong margin-m-top-30">Contact Us</h4>
+          <h4 class="text-white text-strong margin-m-top-30">Contact Us or Request Contact</h4>
         </div>
-        <div class="modal-body pull-left">
+        <div class="row justify-content-center">
+          <div class="" style="padding:30px;">
+            <div class="modal-body pull-left">
 
-          <a class="text-white" href="tel:0660105316"><i class="now-ui-icons tech_mobile"></i> 066 010 5316</a><br>
-          <a class="text-white" href="mailto:sales@nohire.co.za"><i class="now-ui-icons ui-1_email-85"></i>
-            sales@nohire.co.za</a>
-          <div class="text-white">
-            Find us at:<br>
-            <address>
-              First Floor, <br>Willowbridge Centre,<br>
-              Carl Cronje Dr, <br>Bellville Park,<br>
-              Cape Town,<br>7530</p>
-            </address>
+              <a class="text-white" href="tel:0660105316"><i class="now-ui-icons tech_mobile"></i> 066 010 5316</a><br>
+              <a class="text-white" href="mailto:sales@nohire.co.za"><i class="now-ui-icons ui-1_email-85"></i>
+                sales@nohire.co.za</a>
+              <div class="text-white">
+                Find us at:<br>
+                <address>
+                  First Floor, <br>Willowbridge Centre,<br>
+                  Carl Cronje Dr, <br>Bellville Park,<br>
+                  Cape Town,<br>7530</p>
+                </address>
+              </div>
+            </div>
           </div>
+          <div class=""  style="padding:30px;">
+            <form id="contact-form">
+              <!-- Name input-->
+             
+              <input type="hidden" name="product">
+
+              <div class="form-floating mb-3">
+                <input class="form-control" name="from_name" type="text" placeholder="Enter your name..."
+                  data-sb-validations="required" />
+                <label for="name">Name</label>
+                <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+              </div>
+              <!-- Email address input-->
+              <div class="form-floating mb-3">
+                <input class="form-control" name="user_email" type="email" placeholder="name@example.com"
+                  data-sb-validations="required,email" />
+                <label for="email">Email address</label>
+                <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
+                <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+              </div>
+              <!-- Phone number input-->
+              <div class="form-floating mb-3">
+                <input class="form-control" name="contact_number" type="tel" placeholder="(123) 456-7890"
+                  data-sb-validations="required" />
+                <label for="phone">Phone number</label>
+                <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.
+                </div>
+              </div>
+              <!-- company name input-->
+              <div class="form-floating mb-3">
+                <input class="form-control" name="user_company" type="text" placeholder="Nostay"
+                  data-sb-validations="required" />
+                <label for="email">Company name</label>
+                <div class="invalid-feedback" data-sb-feedback="message:required">A name is required.
+                </div>
+              </div>
+              <!-- Town input-->
+              <div class="form-floating mb-3">
+                <input class="form-control" name="user_town" type="text" placeholder="Cape Town"
+                  data-sb-validations="required" />
+                <label for="email">Town</label>
+                <div class="invalid-feedback" data-sb-feedback="message:required">A town is required.
+                </div>
+              </div>
+              <!-- Message input
+          <div class="form-floating mb-3">
+              <textarea class="form-control" type="text" name="user_message"
+                  placeholder="Enter your message here..." style="height: 10rem"
+                  data-sb-validations="required"></textarea>
+              <label for="message">Message</label>
+              <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.
+              </div>
+          </div>-->
+              <!-- Submit success message-->
+              <!---->
+              <!-- This is what your users will see when the form-->
+              <!-- has successfully submitted-->
+              <div class="d-none" id="submitSuccessMessage">
+                <div class="text-center mb-3">
+                  <div class="fw-bolder">Form submission successful!</div>
+                  To activate this form, sign up at
+                  <br />
+                  <a
+                    href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                </div>
+              </div>
+              <!-- Submit error message-->
+              <!---->
+              <!-- This is what your users will see when there is-->
+              <!-- an error submitting the form-->
+              <div class="d-none" id="submitErrorMessage">
+                <div class="text-center text-danger mb-3">Error sending message!</div>
+              </div>
+              <!-- Submit Button-->
+              <div class="d-grid"><button class="btn btn-primary btn-xl" type="submit" value="Send">Contact Me</button>
+              </div>
+            </form>
+          </div>
+         
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer justify-content-center" >
           <button type="button" class="btn btn-link btn-neutral" data-dismiss="modal">Close</button>
         </div>
       </div>
@@ -186,7 +292,7 @@
         <script>
           document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))
         </script> Maintained by
-        <a href="http://www.neuraltech.co.za/" target="_blank">NeuralTech</a>.
+        <a href="#" target="_blank">Nogroup Pty LTD</a>.
       </div>
     </div>
   </footer>
