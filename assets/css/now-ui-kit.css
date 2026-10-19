@@ -52,6 +52,10 @@
   background: rgba(44, 44, 44, 0.2);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .bootstrap-switch .bootstrap-switch-container {
   display: inline-flex;
   top: 0;
