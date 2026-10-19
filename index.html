@@ -70,7 +70,7 @@
     .login-page .footer { position: relative; bottom: auto; width: 100%; color: #2c2c2c; background: #fff; }
     .login-page .footer a:not(.btn) { color: #2c2c2c; }
     @media (max-width: 767px) { .contact-section { padding: 48px 0; } }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
   </style>
 </head>
 <body class="login-page sidebar-collapse">
@@ -175,19 +175,16 @@
               </div>
               <div class="pull-right">
                 <h6>
-                  <a style="font-size: larger;"href="#contact" class="link">Contact Us</a>
+                  <a style="font-size: large;" href="#contactus" class="link">Contact Us</a>
                 </h6>
               </div>
             </div>
           </form>
-          
         </div>
-        
       </div>
-      
     </div>
   </div>
-  <section id="contact" class="contact-section" aria-labelledby="contact-heading">
+  <section id="contactus" class="contact-section" aria-labelledby="contact-heading">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-10">
@@ -239,7 +236,7 @@
             </a>
           </li>
           <li>
-            <a href="#contact">
+            <a href="#contactus">
               Contact Us
             </a>
           </li>
@@ -268,5 +265,21 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
   <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
   <script src="/assets/js/now-ui-kit.js?v=1.2.0" type="text/javascript"></script>
+  <script>
+    // Animate contact links explicitly using the existing jQuery dependency.
+    document.addEventListener('click', function (event) {
+      var link = event.target.closest('a[href="#contact"]');
+      var target = document.getElementById('contact');
+      if (!link || !target || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      // Disable native smoothing while jQuery controls each animation frame.
+      document.documentElement.style.setProperty('scroll-behavior', 'auto', 'important');
+      document.body.style.setProperty('scroll-behavior', 'auto', 'important');
+      jQuery('html, body').stop(true).animate({
+        scrollTop: Math.max(0, target.getBoundingClientRect().top + window.pageYOffset - 24)
+      }, 700, 'swing');
+    }, true);
+  </script>
 </body>
 </html>
